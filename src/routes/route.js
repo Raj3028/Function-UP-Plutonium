@@ -109,18 +109,27 @@ router.get("/get/films/:filmId", function (req, res) {
   const id = req.params;
   const idIndex = id.filmId;
 
-  const checkId = function (a) {
-    return a.id;
-  };
-  const getId = films.map(checkId);
-  let filmName = "";
-
-  if (idIndex != 0 || idIndex <= getId.length) {
-    filmName = films[idIndex - 1];
-  } else {
-    filmName = "No movie exists with this id";
+  for (let i = 0; i < films.length; i++) {
+    let film = films[i];
+    if (film.id == idIndex) {
+      return res.send(film);
+    }
   }
 
-  res.send(filmName);
+  res.send("No movie exists with this id");
+  // const checkId = function (a) {
+  // return a.id;
+  // };
+  // const getId = films.map(checkId);
+  // let filmName = "";
+
+  // if (idIndex != 0 || idIndex <= getId.length) {
+  // filmName = films[idIndex - 1];
+  // } else {
+  // filmName = "No movie exists with this id";
+  // }
+
+  // res.send(filmName);
 });
+
 module.exports = router;
