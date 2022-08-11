@@ -26,6 +26,21 @@ let players = [
     sports: ["soccer"],
   },
 ];
+router.post("/players", function (req, res) {
+  let playesNames = req.body;
+  let newName = playesNames.name;
+  //   let isThisRepeatedName = false;
+
+  for (i = 0; i < players.length; i++) {
+    if (players[i].name === newName) {
+      return res.send("The name is already exists.");
+    }
+  }
+
+  players.push(playesNames);
+  res.send({ players: players });
+});
+//   ======================OR======================
 
 // router.post("/players", function (req, res) {
 //   let playerBody = req.body;
@@ -45,19 +60,5 @@ let players = [
 //   res.send(players);
 // });
 
-router.post("/players", function (req, res) {
-  let playesNames = req.body;
-  let newName = playesNames.name;
-  //   let isThisRepeatedName = false;
-
-  for (i = 0; i < players.length; i++) {
-    if (players[i].name === newName) {
-      return res.send("The name is already exists.");
-    }
-  }
-
-  players.push(playesNames);
-  res.send({ players: players });
-});
 //================================================
 module.exports = router;
