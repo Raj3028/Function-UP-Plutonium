@@ -93,7 +93,7 @@ router.post("/vote", function (req, res) {
   let voterAge = req.query.voterAge;
 
   for (i = 0; i < person.length; i++) {
-    if (person[i].age > voterAge) {
+    if (person[i].age >= voterAge) {
       person[i].votingStatus = true;
     }
   }
