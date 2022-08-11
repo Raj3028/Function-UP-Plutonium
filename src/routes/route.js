@@ -98,7 +98,7 @@ router.post("/vote", function (req, res) {
     }
   }
   // ++++++++++++++++++OR++++++++++++++++++
-  //let result = person.filter((x) => x.age > voterAge).map((x) => (x.votingStatus = true));
+  //let result = person.filter((x) => x.age >= voterAge).map((x) => (x.votingStatus = true));
   // ++++++++++++++++++++++++++++++++++++
 
   res.send({ date: person, statu: true });
