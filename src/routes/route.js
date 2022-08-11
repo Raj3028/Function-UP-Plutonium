@@ -60,5 +60,49 @@ router.post("/players", function (req, res) {
 //   res.send(players);
 // });
 
+//================================================ Assignment- post request-Voting Status
+router.post("/vote", function (req, res) {
+  let person = [
+    {
+      name: "PK",
+      age: 10,
+      votingStatus: false,
+    },
+    {
+      name: "SK",
+      age: 20,
+      votingStatus: false,
+    },
+    {
+      name: "AA",
+      age: 70,
+      votingStatus: false,
+    },
+    {
+      name: "SC",
+      age: 5,
+      votingStatus: false,
+    },
+    {
+      name: "HO",
+      age: 40,
+      votingStatus: false,
+    },
+  ];
+
+  let voterAge = req.query.voterAge;
+
+  for (i = 0; i < person.length; i++) {
+    if (person[i].age > voterAge) {
+      person[i].votingStatus = true;
+    }
+  }
+  // ++++++++++++++++++OR++++++++++++++++++
+  //let result = person.filter((x) => x.age > voterAge).map((x) => (x.votingStatus = true));
+  // ++++++++++++++++++++++++++++++++++++
+
+  res.send({ date: person, statu: true });
+});
+
 //================================================
 module.exports = router;
