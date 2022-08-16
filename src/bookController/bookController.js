@@ -30,7 +30,7 @@ const getParticularBooks = async function (req, res) {
 // ==========================getXINRBooks=============================
 const getXINRBooks = async function (req, res) {
   let allBooksData = await books
-    .find({ "price.indianPrice": { $in: ["₹100", "₹200", "₹500"] } })
+    .find({ "price.indianRupees": { $in: ["₹200", "₹250", "₹500"] } })
     .select({ bookName: 1, _id: 0 });
   res.send({ allBookInfo: allBooksData });
 };
