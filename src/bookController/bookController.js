@@ -7,17 +7,16 @@ const bookInput = async function (req, res) {
 };
 // ==========================bookList=============================
 const allData = async function (req, res) {
-  let allBooksData = await books.find({
-    bookName: "FunctionUP",
-    authorName: "RKS",
-  });
+  let allBooksData = await books
+    .find()
+    .select({ bookName: 1, authorName: 1, _id: 0 });
   res.send({ allBookInfo: allBooksData });
 };
 // ==========================getBooksInYear=============================
 const getBooksInYear = async function (req, res) {
   let data = req.query.year;
   let yearData = await books
-    .find({ year: data })
+    .find({ year: { $eq: data } })
     .select({ bookName: 1, _id: 0 });
   res.send({ bookInfo: yearData });
 };
