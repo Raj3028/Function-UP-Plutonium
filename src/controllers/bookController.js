@@ -21,7 +21,7 @@ const getBooksData = async function (req, res) {
 };
 // ===============Get-Data-With-Author&Publisher-Details=================
 const getBooksWithAuthorAndPublisherDetails = async function (req, res) {
-    let specificBook = await bookModel.find().populate("author").populate("publisher");
+    let specificBook = await bookModel.find().populate(["author", "publisher"])
     res.send(specificBook);
 
 };
@@ -37,8 +37,8 @@ const updateOldBook = async function (req, res) {
 // ===============Update-All-New-Books=================
 /*For the books published by 'Penguin' and 'HarperCollins', update this key to true.*/
 const updateNewBook = async function (req, res) {
-    let findDataAuthor = await publisherDetails.find({ name: { $in: ["Penguin", "HarperCollins"] } })
-    let fetch = findDataAuthor.map(x => x._id)
+    let findDataPublisher = await publisherDetails.find({ name: { $in: ["Penguin", "HarperCollins"] } })
+    let fetch = findDataPublisher.map(x => x._id)
     let books = await bookModel.updateMany(
         { publisher: fetch },
         { $set: { isHardCover: true } },
@@ -50,7 +50,7 @@ const updateNewBook = async function (req, res) {
 /* For the books written by authors having a rating greater than 3.5, 
  update the books price by 10 (For eg if old price for such a book is 50, new will be 60)*/
 const updatePriceOfBook = async function (req, res) {
-    let findDataAuthor = await authorDetails.find({ rating: { $gte: 3.5 } })
+    let findDataAuthor = await authorDetails.find({ rating: { $gt: 3.5 } })
     let fetch = findDataAuthor.map(x => x._id)
     let books = await bookModel.updateMany(
         { author: fetch },
