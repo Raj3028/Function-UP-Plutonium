@@ -1,4 +1,3 @@
-const { count } = require("console")
 const BookModel = require("../models/bookModel")
 
 const createBook= async function (req, res) {
@@ -72,8 +71,10 @@ const totalSalesPerAuthor = async function (req, res) {
 
 
 
-module.exports.createBook = createBook
-module.exports.getBooksData = getBooksData
-module.exports.updateBooks = updateBooks
-module.exports.deleteBooks = deleteBooks
-module.exports.totalSalesPerAuthor = totalSalesPerAuthor
+module.exports = {createBook, getBooksData, updateBooks, deleteBooks, totalSalesPerAuthor}
+
+// module.exports.createBook = createBook
+// module.exports.getBooksData = getBooksData
+// module.exports.updateBooks = updateBooks
+// module.exports.deleteBooks = deleteBooks
+// module.exports.totalSalesPerAuthor = totalSalesPerAuthor
