@@ -36,7 +36,7 @@ mongoose.connect("mongodb+srv://raj_3028:kWaM507ps0Icsdg0@cluster0.pw23ckf.mongo
 app.use(
     function globalMiddleWare(req, res, next) {
         const today = moment();
-        const formatted = today.format('YYYY-MM-DD HH:MM:SS');
+        const formatted = today.format('YYYY-MM-DD hh:mm:ss');
         console.log(formatted, ",", req.ip, ",", req.originalUrl);
         next()
     }
