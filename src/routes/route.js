@@ -24,7 +24,7 @@ router.get("/getUser", newUserCreate.getNewUser)
 const { createUser, getUser } = require("../controllers/userController")
 const { createProduct, getProductDetails } = require("../controllers/productController")
 const { createOrder, getAllOrderData } = require("../controllers/orderController")
-const { midHeader, midUserId, midProductId, midCheckUserData } = require("../middlewares/validation")
+const { midHeader, midUserId, midProductId, midCheckUserData, isFreeAppUser } = require("../middlewares/validation")
 // ============================================================
 
 router.post("/createUser", midHeader, midCheckUserData, createUser)
@@ -37,7 +37,7 @@ router.get("/getProductDetails", getProductDetails)
 
 // ============================================================
 
-router.post("/createOrder", midHeader, midUserId, midProductId, midCheckUserData, createOrder)
+router.post("/createOrder", isFreeAppUser, midHeader, midUserId, midProductId, midCheckUserData, createOrder)
 router.get("/getAllOrderData", getAllOrderData)
 
 // ============================================================
