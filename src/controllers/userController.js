@@ -4,6 +4,7 @@ const userModel = require("../models/userModel");
 /*
   Read all the comments multiple times to understand why we are doing what we are doing in login api and getUserData api
 */
+// ===============================================Create-User(Post-API)======================================================
 const createUser = async function (abc, xyz) {
   //You can name the req, res objects anything.
   //but the first parameter is always the request 
@@ -13,7 +14,7 @@ const createUser = async function (abc, xyz) {
   // console.log(abc.newAtribute);
   xyz.send({ msg: savedData });
 };
-
+// ============================================Login-User(Post-API)=========================================================
 const loginUser = async function (req, res) {
   let userName = req.body.emailId;
   let password = req.body.password;
@@ -28,7 +29,7 @@ const loginUser = async function (req, res) {
   // The decision about what data to put in token depends on the business requirement
   // Input 2 is the secret (This is basically a fixed value only set at the server. This value should be hard to guess)
   // The same secret will be used to decode tokens 
-  let token = JWT.sign(
+  let token = JWT.sign(                       //Generation for Token
     {
       userId: user._id.toString(),
       batch: "Plutonium",
@@ -39,7 +40,7 @@ const loginUser = async function (req, res) {
   res.setHeader("x-auth-token", token);
   res.send({ status: true, token: token });
 };
-
+// ===========================================Get-User-Data(Get-API)==========================================================
 const getUserData = async function (req, res) {
 
   let token = req.headers["x-auth-token"]
@@ -66,7 +67,7 @@ const getUserData = async function (req, res) {
   res.send({ status: true, data: userDetails });
   // Note: Try to see what happens if we change the secret while decoding the token
 };
-
+// ===========================================Update-User-Document(Put-API)==========================================================
 const updateUser = async function (req, res) {
   // Do the same steps here:
   // Check if the token is present
@@ -82,20 +83,21 @@ const updateUser = async function (req, res) {
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
   res.send({ status: updatedUser, data: updatedUser });
 };
-
+// =================================================Delete-User-Data(Delete-API)====================================================
 const deleteUser = async function (req, res) {
   let userId = req.params.userId;
   let deleteUser = await userModel.findByIdAndUpdate({ _id: userId }, { $set: { isDeleted: true } }, { new: true })
   return res.send({ msg: deleteUser })
 }
-
+// =====================================================================================================
 // JWT Token:
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzBhZmUyYmViOWU3NjkxODlkOWU2NjgiLCJiYXRjaCI6IlBsdXRvbml1bSIsIm9yZ2FuaXNhdGlvbiI6IkZ1bmN0aW9uVXAiLCJpYXQiOjE2NjE2NjUxMTl9.c-IH5GhMuXMJM8k2QL7C0ATnr9dE6wnGwkOYoEBF7-I
 
 // }
+// ================================================Export-Functions=====================================================
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
 module.exports.deleteUser = deleteUser
-
+// =====================================================================================================

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+// =====================================================================================================
 const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
@@ -10,5 +10,5 @@ const userSchema = new mongoose.Schema({
     isDeleted: { type: Boolean, default: false },
     age: Number,
 }, { timestamps: true });
-
+// =====================================================================================================
 module.exports = mongoose.model('UserJWT', userSchema)
