@@ -55,14 +55,13 @@ const getUserData = async function (req, res) {
   // Decoding requires the secret again. 
   // A token can only be decoded successfully if the same secret was used to create(sign) that token.
   // And because this token is only known to the server, it can be assumed that if a token is decoded at server then this token must have been issued by the same server in past.
-  let decodedToken = JWT.verify(token, "functionup-plutonium-very-very-secret-key");
-  if (!decodedToken)
-    return res.send({ status: false, msg: "token is invalid" });
+
 
   let userId = req.params.userId;
   let userDetails = await userModel.findById(userId);
   if (!userDetails)
-    return res.send({ status: false, msg: "No such user exists" });
+    return res.send({ status: false, msg: "No such user exists." });
+
 
   res.send({ status: true, data: userDetails });
   // Note: Try to see what happens if we change the secret while decoding the token
@@ -89,9 +88,7 @@ const deleteUser = async function (req, res) {
   let deleteUser = await userModel.findByIdAndUpdate({ _id: userId }, { $set: { isDeleted: true } }, { new: true })
   return res.send({ msg: deleteUser })
 }
-// =====================================================================================================
-// JWT Token:
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzBhZmUyYmViOWU3NjkxODlkOWU2NjgiLCJiYXRjaCI6IlBsdXRvbml1bSIsIm9yZ2FuaXNhdGlvbiI6IkZ1bmN0aW9uVXAiLCJpYXQiOjE2NjE2NjUxMTl9.c-IH5GhMuXMJM8k2QL7C0ATnr9dE6wnGwkOYoEBF7-I
+
 
 // }
 // ================================================Export-Functions=====================================================
