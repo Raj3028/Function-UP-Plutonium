@@ -44,3 +44,6 @@ Think of this like getting an ID card the first day of your college and then sho
 + You now have to move this similar code in all the three apis in a suitable middleware
 
 ```
+
+- Use Try and Catch method.
+- Use HTTP status codes and implement things well.
