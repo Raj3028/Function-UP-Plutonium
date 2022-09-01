@@ -60,7 +60,7 @@ let getByPin = async function (req, res) {
 let getOtp = async function (req, res) {
     try {
         let blahhh = req.body
-        
+
         console.log(`body is : ${blahhh} `)
         var options = {
             method: "post",
@@ -77,6 +77,12 @@ let getOtp = async function (req, res) {
         res.status(500).send({ msg: err.message })
     }
 }
+
+
+
+
+
+
 
 
 module.exports.getStates = getStates
